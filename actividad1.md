@@ -27,3 +27,60 @@ DevOps es un enfoque de trabajo que combina:
 - Reducir tiempos de espera y burocracia.
 - Resolver problemas de manera más eficiente al contar con diversas perspectivas.
 - Automatizar y mejorar continuamente los procesos, asegurando entregas más rápidas y confiables.
+
+### Preguntas de reflexion Parte 2
+------------
+**-¿Qué significa "desplazar a la izquierda" en el contexto de DevSecOps y por qué es importante?**
+
+Es integrar la seguridad desde las primeras etapas del desarrollo en lugar de tratarla como un paso final antes del despliegue.
+
+-Permite identificar y corregir vulnerabilidades desde el inicio.
+
+-Reduce costos y tiempo de corrección de errores de seguridad.
+
+-Fomenta una cultura de seguridad en el equipo de desarrollo.
+
+**-Explica cómo IaC mejora la consistencia y escalabilidad en la gestión de infraestructuras.**
+
+Permite gestionar la infraestructura mediante código en lugar de configuraciones manuales. Esto mejora la consistencia y escalabilidad ya sea con la automatizacion, consistencia, escalabilidad y trazabilidad.
+
+**-¿Cuál es la diferencia entre monitoreo y observabilidad? ¿Por qué es crucial la observabilidad en sistemas complejos?**
+
+-Monitoreo: Se enfoca en recopilar métricas predefinidas sobre el sistema (CPU, memoria, logs, alertas).
+
+-Observabilidad: este enfoque nos permite ver el estado del sistema a partir de sus datos de salida como metricas, logs y trazabilidad.    
+
+-
+Permite detectar y solucionar problemas rápidamente en arquitecturas modernas (microservicios, contenedores).
+
+-
+Facilita el análisis de causa raíz de fallos inesperados.
+ poco de texto
+ 
+**-¿Cómo puede la experiencia del desarrollador impactar el éxito de DevOps en una organización?**
+
+-Una buena experiencia del desarrollador mejora la productividad y la eficiencia en DevOps porque:
+
+-
+Reduce la fricción en el desarrollo, prueba e implementación de software.
+
+-
+Fomenta una cultura de colaboración y automatización.
+
+-
+Disminuye el tiempo de entrega al proporcionar herramientas y entornos optimizados.
+
+-
+Reduce la rotación del talento, ya que los desarrolladores satisfechos trabajan mejor en equipo.
+
+**-Describe cómo InnerSource puede ayudar a reducir silos dentro de una organización.**
+
+InnerSource es la aplicación de prácticas de código abierto dentro de una empresa para fomentar la colaboración entre equipos. Esto ayuda a reducir los silos porque cualquier desarrollador puede acceder y contribuir al código de otros equipos, mejorando la reutilización y optimización de soluciones. Al compartir el conocimiento se evita que cada equipo trabaje de manera aislada y se acelera el desarrollo de software dentro de la organización.
+
+
+**-¿Qué rol juega la ingeniería de plataformas en mejorar la eficiencia y la experiencia del desarrollador?**
+
+-La ingeniería de plataformas se enfoca en crear herramientas y servicios internos para
+mejorar el flujo de trabajo de los desarrolladores.
+
+Algunos ejemplos puede ser Github Actions, Docker + Kubernetes y Grafana + Prometheus
