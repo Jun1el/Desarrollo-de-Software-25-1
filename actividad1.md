@@ -50,28 +50,21 @@ Permite gestionar la infraestructura mediante código en lugar de configuracione
 
 -Observabilidad: este enfoque nos permite ver el estado del sistema a partir de sus datos de salida como metricas, logs y trazabilidad.    
 
--
-Permite detectar y solucionar problemas rápidamente en arquitecturas modernas (microservicios, contenedores).
+-Permite detectar y solucionar problemas rápidamente en arquitecturas modernas (microservicios, contenedores).
 
--
-Facilita el análisis de causa raíz de fallos inesperados.
- poco de texto
+-Facilita el análisis de causa raíz de fallos inesperados.
  
 **-¿Cómo puede la experiencia del desarrollador impactar el éxito de DevOps en una organización?**
 
--Una buena experiencia del desarrollador mejora la productividad y la eficiencia en DevOps porque:
+Una buena experiencia del desarrollador mejora la productividad y la eficiencia en DevOps porque:
 
--
-Reduce la fricción en el desarrollo, prueba e implementación de software.
+-Reduce la fricción en el desarrollo, prueba e implementación de software.
 
--
-Fomenta una cultura de colaboración y automatización.
+-Fomenta una cultura de colaboración y automatización.
 
--
-Disminuye el tiempo de entrega al proporcionar herramientas y entornos optimizados.
+-Disminuye el tiempo de entrega al proporcionar herramientas y entornos optimizados.
 
--
-Reduce la rotación del talento, ya que los desarrolladores satisfechos trabajan mejor en equipo.
+-Reduce la rotación del talento, ya que los desarrolladores satisfechos trabajan mejor en equipo.
 
 **-Describe cómo InnerSource puede ayudar a reducir silos dentro de una organización.**
 
