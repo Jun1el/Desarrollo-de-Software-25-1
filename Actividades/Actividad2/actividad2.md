@@ -79,4 +79,79 @@ Los archivos en la raíz (main.tf, variables.tf, outputs.tf, etc.) manejan la in
 
 - Describir un flujo simple de despliegue donde un desarrollador hace un cambio en el código, se construye una nueva imagen Docker y se actualiza un Deployment de Kubernetes.
 
+**1️⃣ Hacer un cambio en el código y subirlo a Git**
+
+`git add . `
+
+`git commit -m "Actualización de la aplicación"`
+
+`git push origin main`
+
+**2️⃣ Construir y subir la nueva imagen Docker**
+
+`docker build -t Juniel/mi-app:v2 .`
+
+`docker push Juniel/mi-app:v2`
+
+**3️⃣ Actualizar el Deployment en Kubernetes**
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mi-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mi-app
+  template:
+    metadata:
+      labels:
+        app: mi-app
+    spec:
+      containers:
+        - name: mi-app
+          image: miusuario/mi-app:v2  #Nueva versión de la imagen
+          ports:
+            - containerPort: 80
+```
+**Aplicar los cambios en Kubernetes:**
+
+`kubectl apply -f deployment.yaml`
+
+**Verificar el despliegue**
+
+`kubectl get pods`
+
+`kubectl rollout status deployment/mi-app`
+
 - Explicar las ventajas de usar Kubernetes para escalar una aplicación en un evento de alto tráfico.
+
+**Ventajas de Kubernetes para escalar en eventos de alto tráfico**
+
+1. Escalado automático (Auto-scaling)
+
+Kubernetes escala automáticamente la cantidad de pods según la carga del sistema usando el Horizontal Pod Autoscaler (HPA).
+
+Si el tráfico aumenta Kubernetes puede crear más instancias de la aplicación para soportar la demanda.
+
+2. Balanceo de carga
+
+Kubernetes usa Services para distribuir el tráfico entre múltiples pods, evitando que un solo nodo o pod se sobrecargue.
+
+3. Alta disponibilidad y tolerancia a fallos
+
+Si un pod falla Kubernetes lo reemplaza automáticamente.
+
+Si un nodo se cae los pods pueden ser reasignados a otros nodos disponibles.
+
+4. Despliegues sin interrupciones
+
+Con estrategias como Rolling Updates o Canary Deployment permite actualizar la aplicación sin afectar a los usuarios.
+
+## Tarea teórica P3: ##
+
+- Investigar y describir cómo Prometheus y Grafana se integran con Kubernetes para monitorear los contenedores y el cluster.
+
+- Proponer un set de métricas y alertas mínimas para una aplicación web (por ejemplo, latencia de peticiones, uso de CPU/memoria, tasa de errores).
