@@ -154,4 +154,78 @@ Con estrategias como Rolling Updates o Canary Deployment permite actualizar la a
 
 - Investigar y describir cómo Prometheus y Grafana se integran con Kubernetes para monitorear los contenedores y el cluster.
 
+
+**Prometheus** es una herramienta de monitoreo que usa series temporales que recopila métricas de aplicaciones y componentes del clúster. 
+
+Ejemplo de configuración en `prometheus.yml`:
+
+```yaml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'mi-app'
+    static_configs:
+      - targets: ['app-service:8080']
+```
+
+Prometheus se integra con Kubernetes mediante **Service Discovery**, detectando automáticamente pods y servicios para recopilar métricas sin configuraciones manuales.
+
+**Grafana**, por su parte, proporciona visualización avanzada mediante dashboards personalizables. A través de consultas en **PromQL**, se pueden graficar indicadores clave como latencia de peticiones, uso de recursos y tasas de error, facilitando la supervisión en tiempo real.
+
+
 - Proponer un set de métricas y alertas mínimas para una aplicación web (por ejemplo, latencia de peticiones, uso de CPU/memoria, tasa de errores).
+
+Métricas y alertas mínimas recomendadas
+
+Para garantizar un monitoreo eficiente de una aplicación web en Kubernetes, se recomienda establecer métricas clave y configurar alertas asociadas:
+
+| **Métrica** | **Descripción** | **Umbral de alerta** |
+|------------|---------------|----------------------|
+| **Latencia de peticiones** (`http_request_duration_seconds`) | Tiempo de respuesta de la API. | P95 > 500ms |
+| **Tasa de errores HTTP** (`http_requests_total{status="5xx"}`) | Cantidad de respuestas con código 5xx. | Más del 5% de errores en 5 min |
+| **Uso de CPU** (`container_cpu_usage_seconds_total`) | Consumo de CPU por contenedor. | Más del 80% del límite asignado |
+| **Uso de memoria** (`container_memory_usage_bytes`) | Consumo de RAM por contenedor. | Más del 80% del límite asignado |
+| **Estado de réplicas** (`kube_deployment_status_replicas_available`) | Número de réplicas activas. | Menos réplicas de las esperadas |
+| **Errores en logs** (`log_errors_total`) | Cantidad de errores en registros. | Más de 10 errores en 5 min |
+
+## Tarea Teorica P4 ##
+
+
+- Diferencia entre Entrega Continua (Continuous Delivery) y Despliegue Continuo (Continuous Deployment)
+
+**Entrega Continua (CD - Continuous Delivery)**
+Es la práctica de asegurarse de que el código esté siempre en un estado **listo para producción**. Cada cambio en el código pasa por una serie de pruebas y revisiones, y una vez aprobado, se deja preparado para ser desplegado manualmente cuando el equipo lo decida.
+
+**Despliegue Continuo (CD - Continuous Deployment)**
+Es la evolución del proceso de entrega continua, donde cada cambio aprobado se **despliega automáticamente en producción** sin intervención manual. Solo se detendría en caso de que alguna prueba falle.
+
+
+**Comparación**
+
+| **Concepto**              | **Entrega Continua (Continuous Delivery)** | **Despliegue Continuo (Continuous Deployment)** |
+|---------------------------|--------------------------------|-----------------------------------|
+| **¿Se automatiza el proceso hasta producción?** | No, requiere aprobación manual.  | Sí, todo el proceso es automático. |
+| **¿Cuándo se libera el software?** | Cuando el equipo lo decide.       | Inmediatamente después de pasar las pruebas. |
+| **Nivel de riesgo**       | Bajo (control manual).         | Medio (totalmente automatizado). |
+| **Ejemplo de uso**        | Aplicaciones críticas (banca, salud). | Aplicaciones web con despliegue frecuente. |
+
+---
+
+- Relevancia de las Pruebas Automáticas en el Pipeline
+
+🔹 **Pruebas Unitarias**
+- Verifican el **funcionamiento de unidades individuales** de código (como funciones o métodos).
+- Se ejecutan rápidamente y detectan errores en una etapa temprana.
+- **Ejemplo:** Probar que una función matemática devuelve el resultado esperado.
+
+🔹 **Pruebas de Integración**
+- Verifican la **interacción entre diferentes módulos** del sistema.
+- Aseguran que los componentes se comuniquen correctamente.
+- **Ejemplo:** Comprobar que un servicio backend responde correctamente a una solicitud de la API.
+
+🔹 **Pruebas de Seguridad**
+- Detectan vulnerabilidades y posibles riesgos de seguridad.
+- Evitan que código con fallos de seguridad llegue a producción.
+- **Ejemplo:** Escaneo de inyecciones SQL o autenticaciones inseguras.
+
