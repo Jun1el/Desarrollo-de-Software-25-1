@@ -165,7 +165,102 @@ Y así fue como quedo mi main.py como podemos ver al final me quedo 3 lineas de 
 
 # Ejercicio 3: Creación y gestión de ramas desde commits específicos
 
+1. Crear una nueva rama desde un commit específico:
+
+Para esto primero veremos el historial de commit y elegiremos en este caso escogi el ultimo commit y procedi con el comando 
+
+```bash
+git log --oneline
+$ git branch bugfix/rollback-feature a9a6ff2
+$ git checkout bugfix/rollback-feature
+```
+
+![Imagen 14](Actividad4imagenes/Act4Prob3P1.png)
+
+2. Modificar y confirmar cambios en la nueva rama:
+
+Realizamos un cambio en main.py que simule correccion de errores
+
+```python
+def greet():
+    print('Fixed bug in feature')
+```
+Añade y confirma los cambios en la nueva rama:
+```bash
+$ git add main.py
+$ git commit -m "Fix bug in rollback feature"
+```
+![Imagen 15](Actividad4imagenes/Act4Prob3P22.png)
+
+![Imagen 16](Actividad4imagenes/Act4Prob3P2.png)
+
+3. Fusionar los cambios en la rama principal:
+
+Cambiamos a la rama main y fusionamos con la rama bugfix/rollback-feature:
+
+```bash
+$ git checkout main
+$ git merge bugfix/rollback-feature
+```
+![Imagen 17](Actividad4imagenes/Act4Prob3P3.png)
+
+4. Explorar el historial después de la fusión:
+
+Usamos el comando ya conocido 
+
+```bash
+git log --graph --oneline
+```
+![Imagen 18](Actividad4imagenes/Act4Prob3P4.png)
+
+5. Eliminar la rama bugfix/rollback-feature:
+
+```bash 
+$ git branch -d bugfix/rollback-feature
+```
+
+![Imagen 19](Actividad4imagenes/Act4Prob3P5.png)
 
 # Ejercicio 4: Manipulación y restauración de commits con git reset y git restore
+
+1. Hacer cambios en el archivo main.py:
+
+Editamos main.py para añadir un commit de prueba 
+
+```python
+print('This change will be reset')
+```
+Añade y confirma los cambios:
+
+```bash
+$ git add main.py
+$ git commit -m "Introduce a change to be reset"
+```
+![Imagen 20](Actividad4imagenes/Act4Prob4P1.png)
+
+2. Usar git reset para deshacer el commit:
+
+Deshacimos el commit utilizando git reset para volver al estado anterior:
+
+```bash
+$ git reset --hard HEAD~1
+```
+![Imagen 21](Actividad4imagenes/Act4Prob4P2.png)
+
+3. Usar git restore para deshacer cambios no confirmados:
+
+Realizamos un cambio en README.md y no lo confirmamos:
+
+```bash
+$ echo "Another line in README" >> README.md
+$ git status
+```
+
+Y usamos git restore para deshacer este cambio no confirmado:
+```bash
+$ git restore README.md
+```
+![Imagen 22](Actividad4imagenes/Act4Prob4P3.png)
+
 # Ejercicio 5: Trabajo colaborativo y manejo de Pull Requests
 # Ejercicio 6: Cherry-Picking y Git Stash
