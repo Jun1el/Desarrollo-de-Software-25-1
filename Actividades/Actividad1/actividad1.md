@@ -1,11 +1,14 @@
-### Preguntas de reflexion Parte 1 
+## Preguntas de reflexion Parte 1 
 
-------------
+
 **-¿Por qué surgió la necesidad de DevOps en el desarrollo de software?**
-La necesidad de DevOps surgió debido a los problemas de comunicación, coordinación y eficiencia entre los equipos de desarrollo y operaciones. Antes de DevOps estos equipos trabajaban de manera aislada lo que generaba conflictos al desplegar software, retrasos en la entrega y dificultades para manejar incidentes en producción. DevOps nació para mejorar la colaboración, la automatización y la entrega continua de software de alta calidad.
+
+La necesidad de DevOps surgió debido a los problemas de comunicación, coordinación y eficiencia entre los equipos de desarrollo y operaciones. Antes de DevOps estos equipos trabajaban de manera aislada lo que generaba conflictos al desplegar software, retrasos en la entrega y dificultades para manejar incidentes en producción.
 
 **-Explica cómo la falta de comunicación y coordinación entre los equipos de desarrollo y operaciones en el pasado llevó a la creación de DevOps.**
+
 En el pasado los equipos de desarrollo se encargaban de escribir el código y luego lo entregaban a operaciones para su despliegue y mantenimiento.
+
 - Desarrollo se enfocaba en nuevas características sin considerar problemas de estabilidad en producción.
 
 - Operaciones priorizaba la estabilidad del sistema y veía los cambios frecuentes como un riesgo.
@@ -15,6 +18,7 @@ En el pasado los equipos de desarrollo se encargaban de escribir el código y lu
 **-Describe cómo el principio de mejora continua impacta tanto en los aspectos técnicos como en los culturales de una organización.**
 
 La mejora continua afecta tanto la parte técnica como la cultura de una empresa porque básicamente significa que siempre se está buscando hacer las cosas mejor. En lo técnico esto se ve en la automatización de procesos, la detección rápida de errores y la optimización del software para que sea más eficiente. Pero también cambia la forma en que las personas trabajan, porque impulsa a los equipos a colaborar más, probar nuevas ideas sin miedo a equivocarse y estar abiertos a cambios. Al final, esto ayuda a que el software sea de mejor calidad y que la empresa pueda adaptarse más rápido a lo que necesita el mercado.
+
 **-¿Qué significa que DevOps no se trata solo de herramientas, individuos o procesos?**
 DevOps es un enfoque de trabajo que combina:
 - Cultura: Fomenta la colaboración entre desarrollo y operaciones.
@@ -28,7 +32,7 @@ DevOps es un enfoque de trabajo que combina:
 - Resolver problemas de manera más eficiente al contar con diversas perspectivas.
 - Automatizar y mejorar continuamente los procesos, asegurando entregas más rápidas y confiables.
 
-### Preguntas de reflexion Parte 2
+## Preguntas de reflexion Parte 2
 ------------
 **-¿Qué significa "desplazar a la izquierda" en el contexto de DevSecOps y por qué es importante?**
 
@@ -42,29 +46,27 @@ Es integrar la seguridad desde las primeras etapas del desarrollo en lugar de tr
 
 **-Explica cómo IaC mejora la consistencia y escalabilidad en la gestión de infraestructuras.**
 
-Permite gestionar la infraestructura mediante código en lugar de configuraciones manuales. Esto mejora la consistencia y escalabilidad ya sea con la automatizacion, consistencia, escalabilidad y trazabilidad.
+Permite gestionar la infraestructura mediante código en lugar de configuraciones manuales esto mejora la consistencia y escalabilidad ya sea con la automatizacion, consistencia, escalabilidad y trazabilidad.
 
 **-¿Cuál es la diferencia entre monitoreo y observabilidad? ¿Por qué es crucial la observabilidad en sistemas complejos?**
 
--Monitoreo: Se enfoca en recopilar métricas predefinidas sobre el sistema (CPU, memoria, logs, alertas).
+- Monitoreo: Se enfoca en recopilar métricas predefinidas sobre el sistema (CPU, memoria, logs, alertas).
 
--Observabilidad: este enfoque nos permite ver el estado del sistema a partir de sus datos de salida como metricas, logs y trazabilidad.    
+- Observabilidad: este enfoque nos permite ver el estado del sistema a partir de sus datos de salida como metricas, logs y trazabilidad.    
 
--Permite detectar y solucionar problemas rápidamente en arquitecturas modernas (microservicios, contenedores).
-
--Facilita el análisis de causa raíz de fallos inesperados.
+Permite detectar y solucionar problemas rápidamente en arquitecturas modernas (microservicios, contenedores) y facilita el análisis de causa raíz de fallos inesperados.
  
 **-¿Cómo puede la experiencia del desarrollador impactar el éxito de DevOps en una organización?**
 
 Una buena experiencia del desarrollador mejora la productividad y la eficiencia en DevOps porque:
 
--Reduce la fricción en el desarrollo, prueba e implementación de software.
+- Reduce la fricción en el desarrollo, prueba e implementación de software.
 
--Fomenta una cultura de colaboración y automatización.
+- Fomenta una cultura de colaboración y automatización.
 
--Disminuye el tiempo de entrega al proporcionar herramientas y entornos optimizados.
+- Disminuye el tiempo de entrega al proporcionar herramientas y entornos optimizados.
 
--Reduce la rotación del talento, ya que los desarrolladores satisfechos trabajan mejor en equipo.
+- Reduce la rotación del talento, ya que los desarrolladores satisfechos trabajan mejor en equipo.
 
 **-Describe cómo InnerSource puede ayudar a reducir silos dentro de una organización.**
 
@@ -73,7 +75,6 @@ InnerSource es la aplicación de prácticas de código abierto dentro de una emp
 
 **-¿Qué rol juega la ingeniería de plataformas en mejorar la eficiencia y la experiencia del desarrollador?**
 
--La ingeniería de plataformas se enfoca en crear herramientas y servicios internos para
-mejorar el flujo de trabajo de los desarrolladores.
+- La ingeniería de plataformas se enfoca en crear herramientas y servicios internos para mejorar el flujo de trabajo de los desarrolladores.
 
-Algunos ejemplos puede ser Github Actions, Docker + Kubernetes y Grafana + Prometheus
+Algunos ejemplos puede ser Github Actions, Docker + Kubernetes y Grafana + Prometheus.
