@@ -263,4 +263,80 @@ $ git restore README.md
 ![Imagen 22](Actividad4imagenes/Act4Prob4P3.png)
 
 # Ejercicio 5: Trabajo colaborativo y manejo de Pull Requests
+
+1. Crear un nuevo repositorio remoto:
+
+Use ssh porque tengo mi key privada en mi wsl
+
+```bash
+$ git clone git@github.com:Jun1el/Act4-Problema5.git
+```
+![Imagen 23](Actividad4imagenes/Act4Prob5P1.png)
+
+2. Crear una nueva rama para desarrollo de una característica:
+
+En mi repositorio cree la rama feature/team-feature
+
+```bash
+$ git branch feature/team-feature
+$ git checkout feature/team-feature
+```
+![Imagen 24](Actividad4imagenes/Act4Prob5P2.png)
+
+3. Realizar cambios y enviar la rama al repositorio remoto:
+
+Agregamos un print en el archivo collaboration.py que creamos y confirmamos los cambios
+
+```bash
+$ echo "print('Collaboration is key!')" > collaboration.py
+$ git add .
+$ git commit -m "Add collaboration script"
+```
+
+Enviamos la rama al repositorio remoto:
+
+```bash
+$ git push origin feature/team-feature
+```
+
+![Imagen 25](Actividad4imagenes/Act4Prob5P3.png)
+
+4. Abrir un Pull Request:
+
+Abrimos un Pull Request (PR) en Github para fusionar feature/team-feature con la rama main y añadimos una descripción detallada del PR, explicando los cambios realizados y su propósito.
+
+![Imagen 26](Actividad4imagenes/Act4Prob5P4.png)
+
+
+5. Revisar y fusionar el Pull Request:
+
+Simula la revisión de código, comenta en el PR y realiza cualquier cambio necesario basado en la retroalimentación.
+
+Primero vemos los cambios hechos en el PR
+
+![Imagen 27](Actividad4imagenes/Act4Prob5P5.png)
+
+Añadimos un comentario sobre el contenido
+
+![Imagen 28](Actividad4imagenes/Act4Prob5P52.png)
+
+Aceptamos los cambios y confirmamos el merge y nos deberia quedar asi 
+
+![Imagen 29](Actividad4imagenes/Act4Prob5P53.png)
+
+Vemos que se fucionaron las ramas
+
+![Imagen 30](Actividad4imagenes/Act4Prob5P54.png)
+
+6. Eliminar la rama remota y local:
+
+Después de la fusión, eliminamos la rama tanto local como remotamente:
+
+```bash
+$ git branch -d feature/team-feature
+$ git push origin --delete feature/team-feature
+```
+
+![Imagen 31](Actividad4imagenes/Act4Prob5P6.png)
+
 # Ejercicio 6: Cherry-Picking y Git Stash
