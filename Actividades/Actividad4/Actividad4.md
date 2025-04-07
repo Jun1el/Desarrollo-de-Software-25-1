@@ -339,4 +339,75 @@ $ git push origin --delete feature/team-feature
 
 ![Imagen 31](Actividad4imagenes/Act4Prob5P6.png)
 
+Les dejo el enlace de este repo que esta en Github que use para el ejercicio 5 : https://github.com/Jun1el/Act4-Problema5
+
 # Ejercicio 6: Cherry-Picking y Git Stash
+
+1. Hacer cambios en main.py y confirmarlos:
+
+Hize cambios en el archivo main.py desde la rama main agregue:
+
+```python
+print("Cherry pick this")
+```
+
+![Imagen 32](Actividad4imagenes/Act4Prob6P1.png)
+
+Luego confirme los cambios 
+```bash
+$ git add main.py
+$ git commit -m "Add cherry-pick example"
+```
+
+![Imagen 33](Actividad4imagenes/Act4Prob6P12.png)
+
+2. Crear una nueva rama y aplicar el commit específico:
+
+Primero antes de crear la rama vi los commit para tener el commit-hash de mi ultimo commit y use 
+```bash 
+git log --oneline
+```
+luego procedi con el tutorial y para acotar el cherry pick nos sirve para agregar un commit a otra rama en la que necesites cierto commit como solucion a un bug o segun lo veamos necesario.
+```bash
+$ git branch feature/cherry-pick
+$ git checkout feature/cherry-pick
+$ git cherry-pick b390fbd
+```
+![Imagen 34](Actividad4imagenes/Act4Prob6P2.png)
+
+3. Guardar temporalmente cambios no confirmados:
+
+Realize algunos cambios en main.py pero no los confirme solo agregue a mi main una linea:
+```python
+print(This change is stashed)
+```
+Luego vemos el estado y procedemos con el stash(almacena temporalmente los cambios)
+```bash
+$ git status
+$ git stash
+```
+![Imagen 35](Actividad4imagenes/Act4Prob6P3.png)
+
+
+4. Aplicar los cambios guardados
+
+- Realizamos otros cambios y confírmamos.
+![Imagen 36](Actividad4imagenes/Act4Prob6P4.png)
+- Luego, recuperamos los cambios guardados anteriormente:
+  ```bash
+  $ git stash pop
+  ```
+  **Nota:** Nos salio un conflicto ya que un print estaba encima de otro lo cual solo lo arreglamos y confirmamos y Listo.
+![Imagen 37](Actividad4imagenes/Act4Prob6P42.png)
+
+
+5. Revisar el historial y confirmar la correcta aplicación de los cambios:
+
+Finalmente observamos el historial en este caso lo hare con este comando que me parece mas comodo:
+```bash
+$ git log --oneline
+```
+![Imagen 38](Actividad4imagenes/Act4Prob6P5.png)
+
+Eso seria todo para esta actividad. 
+Gracias
