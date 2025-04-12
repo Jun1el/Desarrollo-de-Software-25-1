@@ -111,7 +111,11 @@ Solucionamos conflicto en el programa en esat ocasion yo use VSC.
 ### Preguntas:
 
 - ¿Qué pasos adicionales tuviste que tomar para resolver el conflicto?
+
+    - Cuando me lanzo el conflicto tuve que entrar al codigo y borrar las lineas y simbolos que genera git para resaltar lo que se ha combinado
+
 - ¿Qué estrategias podrías emplear para evitar conflictos en futuros desarrollos colaborativos?
+    - Considero que primeramente tener buena comunicacion con tu equipo para evitar que uno escriba sobre el codigo de otro asi como designar partes distintas del proyecto a cada desarrollador.
 
 ## Ejercicio: Comparar los historiales con git log después de diferentes fusiones
 
@@ -150,7 +154,23 @@ Adicional mirando las branches agrupadas en la rama maestra
 #### Preguntas:
 
 - ¿Cómo se ve el historial en cada tipo de fusión?
+
+    En este caso el ff y no ff se ven iguales ya que solo se hizo un commit en cada rama antes de fusionar. La diferencia se nota más cuando hay varios commits en la rama antes de fusionar.
+
+    Sin embargo con squash si se notó claramente la diferencia ya que se redujo toda una rama con múltiples commits a un solo commit en main y podemos ver en la imagen todo el proceso que se hizo en las ramas para llegar a ese punto.
+
 - ¿Qué método prefieres en diferentes escenarios y por qué?
+
+    - Fast-forward (--ff):
+        - Ideal para pequeños cambios o fixes rápidos.
+        - Hace el historial mas limpio pero con menos informacion.
+    - Non-fast-forward (--no-ff): 
+        - En util para funcionalidades mas grandes en ramas que tuvimos bastantes commits de desarrollo
+        - Te permite ver claramente cuándo se integró esa característica al proyecto.
+    - Squash (--squash):
+        - Dejamos solo un commit limpio que representa toda la funcionalidad.
+        - Si el proceso de desarrollo interno no es importante de registrar.
+
 
 
 ## Ejercicio: Usando fusiones automáticas y revertir fusiones
@@ -184,4 +204,15 @@ Verificamos el historial:
 ### Preguntas:
 
 - ¿Cuándo usarías un comando como git revert para deshacer una fusión?
+
+    - Usaría **git revert** cuando ya hice una fusión (merge) que se completo, pero me doy cuenta después de que fue un error o que no debería haberse hecho en ese momento ya que este comando no borra el historial ni revierte commits individuales sino que revierte todo el efecto del merge, dejando el historial limpio y manteniendo el control de los cambios.
+
 - ¿Qué tan útil es la función de fusión automática en Git?
+    - Ahorra tiempo: Git detecta automáticamente que los cambios en ambas ramas no entran en conflicto.
+    - Permite trabajar en paralelo con otros desarrolladores sin bloquear el flujo.
+    - Evita errores humanos al hacer merges manuales.
+
+
+
+
+
