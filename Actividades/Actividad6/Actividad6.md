@@ -83,3 +83,151 @@ Al cerrar un sprint el equipo descubre que solo algunos commits de una rama debe
 
 - Tener encuenta que si el commit seleccionado depende de otros cambios anteriores, podrían surgir **conflictos** o el sistema quedar en un estado **incompleto o inestable**.
 
+## Ejercicios prácticos
+
+**1. Simulación de un flujo de trabajo Scrum con git rebase y git merge**
+
+- Paso 1: Crear el repositorio y hacer commit inicial en main
+- Paso 2: Crear la rama feature y agregar un nuevo commit
+- Paso 3: Volver a main y hacer un cambio adicional
+
+![Imagen 7](ImagenesAct6/7.png)
+
+- Paso 4: Hacer rebase de feature sobre main
+
+Git toma el commit que hiciste en feature y lo reaplica como si se hubiera hecho justo después del último commit de main
+- Paso 5: Fusionar feature en main con fast-forward
+  
+Como feature ya está basado directamente en la punta de main, Git solo mueve el puntero de main hacia adelante sin crear un nuevo commit. Es una fusión limpia.
+
+![Imagen 8](ImagenesAct6/8.png)
+
+### Preguntas:
+- ¿Qué sucede con el historial de commits después del rebase?
+    - Los commits de feature se reaplican sobre la punta de main, como si se hubieran creado después de los commits de main.
+    - Se crea un historial lineal, sin commits de merge ni bifurcaciones.
+- ¿En qué situación aplicarías una fusión fast-forward en un proyecto ágil?
+    - Cuando una rama ya ha sido rebased sobre main es posible hacer merge --ff-only para avanzar el puntero de main sin crear un commit de merge.
+
+**2. Cherry-pick para integración selectiva en un pipeline CI/CD**
+- Paso 1: Creamos el repositorio y commit inicial en main
+- Paso 2: Creamos rama feature y agregar múltiples commits
+- Vemos el historial de commits de feature para obtener los hash 
+
+![Imagen 9](ImagenesAct6/9.png)
+
+- Paso 3: Volvemos a main y hacemos cherry-pick solo de los cambios listos
+- Verificamos que los commits hayan sido aplicados
+
+![Imagen 10](ImagenesAct6/10.png)
+
+### Preguntas
+
+- ¿Cómo utilizarías cherry-pick en un pipeline de CI/CD para mover solo ciertos cambios listos a producción?
+
+Por ejemplo al final de un sprint antes de hacer deploy, podemos cherry-pickear a main solo los commits estables y el pipeline detectará esos cambios para desplegar solo lo aprobado.
+
+- ¿Qué ventajas ofrece cherry-pick en un flujo de trabajo de DevOps?
+
+Permite mover cambios precisos evitandonos despliegues incompletos o con código roto y nos  da control granular, mejora la calidad del código en producción y reduce el riesgo de errores en el pipeline.
+
+## Git, Scrum y Sprints
+
+### Fase 1: Planificación del sprint (sprint planning)
+
+#### Ejercicio 1: Crear ramas de funcionalidades (feature branches)
+
+- Crear el repositorio y la rama main
+- Crear ramas para historias de usuario
+    - Historia 1
+    - Historia 2
+
+![Imagen 11](ImagenesAct6/11.png)
+
+#### Pregunta:
+ 
+- ¿Por qué es importante trabajar en ramas de funcionalidades separadas durante un sprint?
+
+Porque nos permite aislar el desarrollo, facilitar pruebas, reducir conflictos entre desarrolladores y hace que sea más fácil revisar y aprobar cambios por separado (Como por ejemplo cuando hacemos pull requests en GitHub).
+
+### Fase 2: Desarrollo del sprint (sprint execution)
+
+#### Ejercicio 2: Integración continua con git rebase
+- Simulamos que main tuvo cambios durante el sprint
+- Y hacemos **rebase** de nuestra rama **feature-user-story-1** sobre main
+
+![Imagen 12](ImagenesAct6/12.png)
+
+#### Pregunta:
+
+- ¿Qué ventajas proporciona el rebase durante el desarrollo de un sprint en términos de integración continua?
+
+El rebase durante el desarrollo de un sprint con CI a reducir conflictos de integración y a mejorar la calidad del software asu vez al ser un historial mas limpio hace mas entendible como se ha desarrollado el proyecto.
+
+Recordar que no se recomienda hacer rebase cuando ya se subio los cambios al repositorio remoto.
+
+### Fase 3: Revisión del sprint (sprint review)
+
+#### Ejercicio 3: Integración selectiva con git cherry-pick
+
+- Cambiamos a feature-user-story-2 y hacemos dos commits
+- Hacemos un git log --oneline para ver el hash del commit listo para revision 
+- Usamos git cherry-pick para llevar solo lo que está listo para revision
+
+![Imagen 13](ImagenesAct6/13.png)
+
+#### Pregunta:
+
+- ¿Cómo ayuda git cherry-pick a mostrar avances de forma selectiva en un sprint review?
+
+Permite integrar solo lo que está 100% listo sin traer partes incompletas que podrían romper el código como el caso que acabamos de hacer. Es ideal para evitar merges apresurados y mantener calidad en el proyecto al evitar confusiones o errores en el pipeline.
+
+### Fase 4: Retrospectiva del sprint (sprint retrospective)
+
+#### Ejercicio 4: Revisión de conflictos y resolución
+- Creamos un archivo con contenido diferente en ambas ramas
+- Intentamos hacer merge de ambas ramas en main
+- Resolvemos conflictos que se causaron cuando queriamos hacer el merge de **feature-user-story-2** y añadimos los cambios y commiteamos.
+
+![Imagen 14](ImagenesAct6/14.png)
+
+#### Preguntas:
+- ¿Cómo manejas los conflictos de fusión al final de un sprint? 
+
+Ademas de corregir manualmente los conflictos deberiamos tener mas comunicacion y pruebas constantes como tambien estar atentos a hacer rebases frecuentes si es necesario y revisar PRs.
+
+- ¿Cómo puede el equipo mejorar la comunicación para evitar conflictos grandes?
+
+    - Evitar trabajar en los mismos archivos sin coordinación.
+
+    - Hacer daily standups para informar quién toca qué.
+
+    - Usar herramientas de integración continua para alertar problemas antes del merge.
+
+### Fase 5: Fase de desarrollo, automatización de integración continua (CI) con git rebase 
+#### Ejercicio 5: Automatización de rebase con hooks de Git
+- Creamos el hook pre-push
+- Pegamos el contenido indicado en la guia
+- Lo hacemos ejecutable con **chmod +x .git/hooks/pre-push**
+- Pruebamos el hook con feature-user-story-2
+
+![Imagen 15](ImagenesAct6/15.png)
+
+#### Pregunta:
+
+- ¿Qué ventajas y desventajas observas al automatizar el rebase en un entorno de CI/CD?
+
+**Ventajas:**
+
+    - Reduce errores humanos (olvidar hacer rebase antes del push).
+    - Evita conflictos grandes al final del sprint porque cada contribución se rebasea frecuentemente.
+    - Facilita la integración en pipelines CI/CD que esperan un historial organizado.
+
+**Desventajas:**
+
+    - Si ocurre un conflicto durante el rebase, el hook interrumpe el push y obliga al usuario a resolverlo localmente.
+    - No todos los equipos usan rebase, por lo que puede no ser compatible con ciertos flujos.
+  
+
+
+
