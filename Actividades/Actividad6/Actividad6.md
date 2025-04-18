@@ -228,6 +228,74 @@ Ademas de corregir manualmente los conflictos deberiamos tener mas comunicacion 
     - Si ocurre un conflicto durante el rebase, el hook interrumpe el push y obliga al usuario a resolverlo localmente.
     - No todos los equipos usan rebase, por lo que puede no ser compatible con ciertos flujos.
   
+## Navegando conflictos y versionado en un entorno devOps
+
+### Ejemplo 
+
+#### 1. Inicialización del proyecto y creación de ramas
+- Creamos un nuevo proyecto
+- Inizializamos git
+- Agregamos dos commits en la misma linea en las ramas main y feature-branch
+- Regresamos a main y hacemos un cambio en la misma linea
+![Imagen e1](ImagenesAct6/e1.png)
+
+
+#### 2. Fusión y resolución de conflictos
+- Hacemos un merge de feature-branch en main lo cual nos generara un conflicto por los cambios en la misma linea por lo cual usamos git status 
+- Yo decidi quedarme con los cambios en main por lo que use **git checkout --ours**
+- Y procedi a hacer hacer el git add y git commit para terminar la fusion.
+
+![Imagen e2](ImagenesAct6/e2.png)
+
+
+#### 3. Simulación de fusiones y uso de git diff
+
+- Simularemos hacer una fusion con **git merge --no-commit --no-ff feature-branch** y veremos las diferencias con **git diff** 
+- Como ya habiamos hecho un merge a feature-branch anteriormente git nos mostrara already up to date.
+- Abortamos la fusion con git abort que revierte el estado del repositorio al punto antes del merge.
+
+![Imagen e3](ImagenesAct6/e3.png)
+
+
+#### 4. Uso de git mergetool
+- Primero tenemos que elegir una herramiento de fusion en mi caso me gusta trabajar con Visual Studio Code.
+- Procedemos a seleccionarlo con **git config --global merge.tool vscode** y **git config --global mergetool.vscode.cmd "code --wait \ $MERGED"**  
+- Eso hace que Git abra VS Code y espere a que guardemos y cerremos el archivo antes de continuar.
+- Luego creamos un conflicto en la rama feature y lo resolvimos usando nuestra mergetool que nos abrira el VSC directamente.
+
+![Imagen e4](ImagenesAct6/e4.png)
+
+
+#### 5. Uso de git revert y git reset
+- Primero obtenemos los hash de los commits.
+- Seleccionamos un commit anterior para hacer el revert que nos creará un nuevo commit que deshace lo hecho en dicho commit en mi caso fue 192292f.
+- En mi caso me salio un conflicto por lo que debemos abrir nuestro **git mergetool** que configuramos en el paso anterior y solucionamos el error
+- Finalmente hacemos nuestro git add y confirmamos el revert con **git revert --continue** 
+![Imagen e51](ImagenesAct6/e51.png)
+
+- Para el caso de reset con mixed supongamos que queremos volver a un estado mas atras por ejemplo en mi caso al commit de conflictos resueltos que fue el **d42a624** y no perder los cambios actuales pero borrando los nuevos commits y dejandolos listos para commitear.
+
+![Imagen e52](ImagenesAct6/e52.png)
+
+#### 6. Versionado semántico y etiquetado
+
+- Para el versionado usamos tags en mi caso usaremos un tag para indicar la version estable como vemos en la imagen.
+    - **-a v1.0.0** indica que estamos creando un tag llamado **v1.0.0**.
+    - **-m "Primera versión estable"** es el mensaje que se asocia al tag similar al commit.
+- Subimos el tag a un repositorio remoto.
+
+![Imagen e6](ImagenesAct6/e6.png)
+
+#### 7. Aplicación de git bisect para depuración
+
+- El comando de **git bisect** lo usamos para encontrar un commit que nos introdujo un error es un proceso de busqueda binaria que nos ayuda a revisar menos commits para encontrar el error.
+- Funcionamiento 
+    - Empezamos con **git bisect start**
+    - Marcamos la version actual como **git bisect bad** que nos dira que esta version no funciona corectamente.
+    - Marcamos el ultimo commit que sepamos que esta bueno como **git bisect good <último_commit_bueno>** que en mi caso es **d42a624**
+    - Finalmente vemos como git nos indica que el ultimo commit fue el malo ya que solo seleccione esos dos commits.
+
+![Imagen e7](ImagenesAct6/e7.png)
 
 
 
