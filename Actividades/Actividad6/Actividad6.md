@@ -298,4 +298,149 @@ Ademas de corregir manualmente los conflictos deberiamos tener mas comunicacion 
 ![Imagen e7](ImagenesAct6/e7.png)
 
 
+## Preguntas
 
+1. Ejercicio para git checkout --ours y git checkout --theirs
+
+Escogeria la version mas estable por ejemplo si estamos en A y es la version mas estable usaria **git checkout --ours** seria la opcion mas rapida para no interrumpir el pipeline otra opcion puede ser corregir manualmente los cambios pero seria mas tardado.
+            
+Para mantener la calidad del codigo tenemos varias opciones a seguir como revisar el archivo antes de hacer commit (git diff), ejecutar pruebas locales (unitarias o de integración) antes de hacer push, verificar el pipeline pase exitosamente y hacer rollback si algo falla usando nuestro historial de commits.
+
+    
+2. Ejercicio para git diff
+
+Primeramente el siguiente comando nos muestra la diferencia entre las dos ramas  
+```bash
+git diff feature-branch..main
+```
+y para comparar cambios mas especificos hariamos esto por ejemplo **git diff feature-branch..main -- config.yml**.
+
+Las ventajas en entornos agiles es que detectas posibles conflictos antes del merge real, permite que QA o DevOps validen los cambios más rápido y limpiar el codigo del PR.
+
+
+3. Ejercicio para git merge --no-commit --no-ff
+```bash
+git merge --no-commit --no-ff feature
+```
+Vemos que no generara un commit y fuerza un merge --no-ff y podriamos ver el codigo y probar fallos, y si estan mal podemos abortar la fusion con **git merge --abort**
+
+La ventajas serian validar la integracion sin comprometer el historial y detectar conflictos antes del push a produccion o staging.
+
+Una idea para automatizarlo en el ci.yml para que en github actions para automatizar esto podria ser asi 
+```bash
+- name: Simular merge con main
+  run: |
+    git fetch origin
+    git checkout -b merge-check origin/main
+    git merge --no-commit --no-ff origin/feature
+    pytest tests/  
+```
+y si falla abortara el pipeline.
+
+4. Ejercicio para git mergetool
+
+La configuracion ya lo hicimos anteriormente pero aqui repito los pasos 
+```bash 
+git config --global merge.tool vscode
+git config --global mergetool.vscode.cmd "code --wait \$MERGED"
+git mergetool
+```
+Este ejemplo es para VSC pero uno puede usar la de su preferencia segun el equipo.
+
+Las ventajas son mas claridad para resolver conflictos y reducir errores humanos al comparar manualmente código desde consola ya que VSC es mas amigable a la vista en mi caso.
+
+Para la consistencia podriamos documentar el uso del mergetool en el Readme o hacer un script de configuracion automatica.
+
+5. Ejercicio para git reset
+
+|Comando|    ¿Qué resetea?             |¿Perderé código?|
+|-------|------------------------------|----------|
+|--soft |Solo mueve el puntero HEAD    | No, ni staging ni código   |
+|--mixed|HEAD + Index (staging)        |  No, pero quita del staging   |
+|--hard |HEAD + Index + Working Directory |  Sí, borra cambios locales   |
+
+Para este caso lo ideal es 
+```bash
+git reset --mixed HEAD~1
+```
+
+ya que queremos eliminar el ultimo commit que rompe el pipeline pero queremos mantener el contenido de ese commit para arreglarlo y despues hacer el commit nuevamente.
+
+6. Ejercicio para git revert
+
+Primero debemos saber que git revert  no borra ni reescribe el historial  sino que crea un nuevo commit que revierte los cambios de uno o más commits anteriores.
+
+```bash 
+## hallamos los hash de los commits
+git log --oneline
+
+a1b2c3d Implementa nueva lógica de pagos
+d4e5f6g Añade validaciones
+h7i8j9k Refactoriza vista principal
+## supongamos que quiero revertirlos todos nos abrira un editor para confirmar cada commit pero lo podemos evitar con --no-edit
+git revert a1b2c3d^..h7i8j9k --no-edit
+```
+Esto nos permite que la pipeline detecta un nuevo commit válido y no romper el deploy lo que asu ves restaura el sistema mientras corregimos los bugs.
+
+7. Ejercicio para git stash
+
+Haremos un pequeño flujo para este caso 
+```bash
+# Guardamos los cambios 
+git stash
+# cambiamos a la rama urgente
+git checkout hotfix-urgente
+# Hacemos el fix, lo commiteamos y hacemos push.
+git checkout main
+#Recuperamos cambios
+git stash pop
+```
+
+Esto impacta en el flujo de trabajo porque nos permite interrumpir nuestro trabajo sin perderlo, nos ayuda a la multitarea y el pipeline no se contamina con codigo a medias.
+
+Para automatizarlo podriamos hacer un script simple como este 
+```bash
+#!/bin/bash
+git stash
+git checkout hotfix-urgente
+echo "Ahora aplica el fix manualmente. Presiona [Enter] para continuar..."
+read
+git checkout -
+git stash pop
+```
+
+Aqui le pongo el read para que se detenga para poder agregar mis correcciones y luego seguir el flujo automaticamente.
+
+8. Ejercicio para .gitignore
+
+Hare un **.gitignore** con los archivos mas comunes que se deben evitar de subir al repositorio en la nube 
+
+```bash 
+# Entornos de desarrollo
+*.log
+*.env
+*.local
+*.config
+# Node.js
+node_modules/
+dist/
+# Python
+__pycache__/
+*.pyc
+# IDEs
+.vscode/
+.idea/
+# Archivos temporales
+*.swp
+*.bak
+```
+
+Esto es importante en CI/CD ya que mantiene el repo limpio ya que puede romper el pipeline tener estos archivos.
+
+Como consejo siempre se debe tener el .gitignore desde el inicio del proyecto ya que me ha pasado que me doy cuenta despues pero se puede solucionar con:
+
+```bash
+git rm --cached archivo_ya_subido
+```
+
+Podemos usar plantillas ya que github tiene varias para casi todos los lenguajes. 
