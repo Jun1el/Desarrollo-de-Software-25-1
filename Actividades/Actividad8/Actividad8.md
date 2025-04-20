@@ -1,5 +1,7 @@
 # Actividad 8: El patrón Arrange-Act-Assert
 
+Hecho por Andres La Torre Vasquez para el curso de Desarrollo de software.
+
 ## Estructura del proyecto y configuracion inicial
 
 ```bash
@@ -95,3 +97,44 @@ stock = factory.Faker("random_int", min=1, max=100)
 - Pruebas exitosas
 
 ![Imagen 1](ImagenesAct8/Act8_11.png)  
+
+### Ejercicio 4: Ordenar items del carrito
+
+![Imagen 1](ImagenesAct8/Act8_13.png)  
+![Imagen 1](ImagenesAct8/Act8_12.png)  
+
+### Ejercicio 5: Uso de Pytest Fixtures
+
+![Imagen 1](ImagenesAct8/Act8_14.png)  
+
+- **Refactorizamos**
+
+![Imagen 1](ImagenesAct8/Act8_15.png)  
+### Ejercicio 6: Pruebas parametrizadas
+
+![Imagen 1](ImagenesAct8/Act8_16.png)  
+
+### Ejercicio 7: Calcular impuestos en el carrito
+
+![Imagen 1](ImagenesAct8/Act8_17.png)  
+
+### Ejercicio 8: Aplicar cupón de descuento con límite máximo
+
+**OBJETIVO**
+- Implementar un método aplicar_cupon(descuento_porcentaje, descuento_maximo) que aplique un cupón de descuento al total del carrito, pero asegurándose de que el descuento no supere un valor máximo.
+
+![Imagen 1](ImagenesAct8/Act8_18.png)  
+
+### Ejercicio 9: Validación de stock al agregar productos (RGR)
+
+**OBJETIVO**
+
+- Asegurarse de que al agregar un producto al carrito, no se exceda la cantidad disponible en stock.
+
+![Imagen 1](ImagenesAct8/Act8_19.png)
+
+**RESULTADO**
+
+Pasamos todas las pruebas y tuvimos una cobertura de codigo del 91% lo cual es muy bueno.
+
+![Imagen 1](ImagenesAct8/Act8_20.png)  
