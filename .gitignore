@@ -1,0 +1,33 @@
+# Archivos y carpetas comunes de Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+*.egg
+*.log
+
+# Entornos virtuales
+venv/
+.env/
+
+# Archivos de cobertura
+htmlcov/
+.coverage
+.tox/
+.cache/
+
+# Reportes de pytest-cov
+coverage.xml
+*.cover
+
+# Archivos de configuración locales o sensibles
+.env
+*.env
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+
+# Archivos de pytest
+.pytest_cache/
