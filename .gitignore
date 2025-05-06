@@ -10,12 +10,6 @@ __pycache__/
 venv/
 .env/
 
-# Archivos de cobertura
-htmlcov/
-.coverage
-.tox/
-.cache/
-
 # Reportes de pytest-cov
 coverage.xml
 *.cover
